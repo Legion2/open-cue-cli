@@ -1,4 +1,4 @@
-# Open CUE CLI
+# Open CUE CLI [![Build](https://github.com/Legion2/open-cue-cli/workflows/Build/badge.svg)](https://github.com/Legion2/open-cue-cli/actions?query=workflow%3ABuild)
 Command Line Interface for iCUE Game SDK.
 This CLI uses the [iCUE Unofficial Game Integration](https://github.com/Zac-McDonald/iCUE-Custom-Game-Integration).
 
