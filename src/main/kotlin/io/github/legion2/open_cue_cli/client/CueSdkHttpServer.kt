@@ -36,8 +36,7 @@ class CueSdkHttpServer(private val host: String = "localhost", private val port:
             throw SdkHttpServerException("Can not send request to SDK HTTP Server: $url\n"
                     + "Make sure the SDK HTTP Server is running and this url is correct.", e)
         }
-        checkForError(response)
-        return response
+        return translateResponse(response)
     }
 
     suspend inline fun <reified T> requestJson(function: String, parameters: Map<String, String> = emptyMap()): T {
@@ -52,14 +51,13 @@ class CueSdkHttpServer(private val host: String = "localhost", private val port:
     }
 
 
-    private fun checkForError(response: String) {
+    private fun translateResponse(response: String): String {
         return when (response) {
-            "" -> throw IllegalArgumentException("The SDK HTTP Server did not respond, this is a programming error and arguments are missing")
-            "CE_Success" -> Unit
+            "CE_Success" -> "Success"
             "CE_MissingPrioritiesFile" -> throw GameSdkError(
                     "game or profile not found, check the GameSdkEffects directory if the game and profiles exists.\n" +
                             "Also make sure the priorities.cfg exist and contains all the profiles.")
-            else -> throw GameSdkError("Unknown Error, check your input")
+            else -> throw GameSdkError("Unknown Error, check your input and the logs of the SDK HTTP Server")
         }
     }
 }

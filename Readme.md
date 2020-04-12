@@ -1,12 +1,44 @@
 # Open CUE CLI [![Build](https://github.com/Legion2/open-cue-cli/workflows/Build/badge.svg)](https://github.com/Legion2/open-cue-cli/actions?query=workflow%3ABuild)
-Command Line Interface for iCUE Game SDK.
-This CLI uses the [iCUE Unofficial Game Integration](https://github.com/Zac-McDonald/iCUE-Custom-Game-Integration).
+Command Line Interface (CLI) to change iCUE profiles form the command line and play multiple profiles at once.
+This CLI uses the iCUE Game SDK via the [iCUE Unofficial Game Integration](https://github.com/Zac-McDonald/iCUE-Custom-Game-Integration) server.
 
 ## Getting Started
 Download and start the [iCUE Unofficial Game Integration](https://github.com/Zac-McDonald/iCUE-Custom-Game-Integration) server.
 Download the [latest release](https://github.com/Legion2/open-cue-cli/releases/latest) of Open CUE CLI and extract the archive.
 You must at least have Java 8 installed.
-Call the cli tool `open-cue-cli.bat` or `open-cue-cli` from a Command Prompt with the option `--help`.
+Call the cli tool `open-cue-cli.bat` or `open-cue-cli` from a command prompt with the option `--help`.
+
+```
+Usage: open-cue-cli [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  -p, --port <port>        Port of the iCUE SDK HTTP Server
+  -H, --host <host or ip>  Hostname or ip address of the iCUE SDK HTTP Server
+  --version                Show the version and exit
+  -h, --help               Show this message and exit
+
+Commands:
+  game
+  state
+  event
+  profile
+```
+
+### Examples
+Activates the profile `SDKL_Fire` from the game `Common` and also set the game active
+```
+open-cue-cli state set -s -g Common SDKL_Fire
+```
+
+Lists all profiles from the current game
+```
+open-cue-cli profile list
+```
+
+Plays the profile `SDKL_Explosion` of the current game as event
+```
+open-cue-cli event set SDKL_Explosion
+```
 
 ### Profiles
 All profiles that you want to use with the Open CUE CLI must be in the iCUE `GameSdkEffects` directory.
