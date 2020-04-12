@@ -7,5 +7,5 @@ data class Game(val name: String,
                 val lastEventTriggered: String)
 
 val Game.echoString: String
-    get() = name + "\n" + lastEventTriggered.ifBlank { "-" } + "\n" + "currentStates:\n" +
+    get() = "$name\nlastEvent: ${lastEventTriggered.ifBlank { "-" }}\ncurrentStates:\n" +
             currentStates.entries.echoString { (key, value) -> "\t$key: $value" }

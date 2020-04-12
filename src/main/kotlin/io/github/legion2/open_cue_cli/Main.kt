@@ -5,6 +5,8 @@ import io.github.legion2.open_cue_cli.event.ClearAllEvent
 import io.github.legion2.open_cue_cli.event.EventCommand
 import io.github.legion2.open_cue_cli.event.SetEvent
 import io.github.legion2.open_cue_cli.game.*
+import io.github.legion2.open_cue_cli.profile.ListProfiles
+import io.github.legion2.open_cue_cli.profile.ProfileCommand
 import io.github.legion2.open_cue_cli.state.ClearAllState
 import io.github.legion2.open_cue_cli.state.ClearState
 import io.github.legion2.open_cue_cli.state.SetState
@@ -26,6 +28,9 @@ fun createCLI(): OpenCueCli {
             EventCommand().subcommands(
                     SetEvent(),
                     ClearAllEvent()
+            ),
+            ProfileCommand().subcommands(
+                    ListProfiles()
             ))
 }
 

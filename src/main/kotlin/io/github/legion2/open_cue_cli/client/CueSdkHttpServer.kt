@@ -1,5 +1,6 @@
 package io.github.legion2.open_cue_cli.client
 
+import io.github.legion2.open_cue_cli.model.Game
 import io.ktor.client.HttpClient
 import io.ktor.client.call.typeInfo
 import io.ktor.client.features.json.GsonSerializer
@@ -11,7 +12,7 @@ import io.ktor.http.URLBuilder
 import io.ktor.http.Url
 import io.ktor.utils.io.core.Input
 
-class CueSdkHttpServer(val host: String = "localhost", val port: Int = 25555) {
+class CueSdkHttpServer(private val host: String = "localhost", private val port: Int = 25555) {
     val client = HttpClient {
         install(JsonFeature) {
             serializer = GsonSerializer()
@@ -51,8 +52,9 @@ class CueSdkHttpServer(val host: String = "localhost", val port: Int = 25555) {
     }
 
 
-    private fun checkForError(response: String): Unit {
+    private fun checkForError(response: String) {
         return when (response) {
+            "" -> throw IllegalArgumentException("The SDK HTTP Server did not respond, this is a programming error and arguments are missing")
             "CE_Success" -> Unit
             "CE_MissingPrioritiesFile" -> throw GameSdkError(
                     "game or profile not found, check the GameSdkEffects directory if the game and profiles exists.\n" +
@@ -60,5 +62,22 @@ class CueSdkHttpServer(val host: String = "localhost", val port: Int = 25555) {
             else -> throw GameSdkError("Unknown Error, check your input")
         }
     }
-
 }
+
+suspend fun CueSdkHttpServer.currentGame(): Game = requestJson("getgame")
+
+suspend fun CueSdkHttpServer.listGames(): Map<String, Game> = requestJson("getallgames")
+
+suspend fun CueSdkHttpServer.setGame(game: String): String = requestString("setgame", mapOf("game" to game))
+
+suspend fun CueSdkHttpServer.resetGame(game: String): String = requestString("reset", mapOf("game" to game))
+
+suspend fun CueSdkHttpServer.clearAllEvents(game: String): String = requestString("clearallevents", mapOf("game" to game))
+
+suspend fun CueSdkHttpServer.setEvent(game: String, event: String): String = requestString("setevent", mapOf("game" to game, "event" to event))
+
+suspend fun CueSdkHttpServer.clearAllStates(game: String): String = requestString("clearallstates", mapOf("game" to game))
+
+suspend fun CueSdkHttpServer.setState(game: String, state: String): String = requestString("setstate", mapOf("game" to game, "state" to state))
+
+suspend fun CueSdkHttpServer.clearState(game: String, state: String): String = requestString("clearstate", mapOf("game" to game, "state" to state))
