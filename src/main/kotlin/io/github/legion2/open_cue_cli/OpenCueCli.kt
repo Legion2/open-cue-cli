@@ -1,6 +1,7 @@
 package io.github.legion2.open_cue_cli
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.ParameterHolder
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.versionOption
@@ -26,3 +27,6 @@ class OpenCueCli : CliktCommand(name = "open-cue-cli") {
 val <T> Iterable<T>.echoString: String get() = joinToString("\n")
 
 fun <T> Iterable<T>.echoString(transform: (T) -> CharSequence): String = joinToString("\n", transform = transform)
+
+fun ParameterHolder.optionForGame(help: String? = null) = option("-g", "--game", help = help
+        ?: "Provide a game as option instead of using the current active game", metavar = "<game>")

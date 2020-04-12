@@ -7,10 +7,11 @@ import com.github.ajalt.clikt.parameters.options.option
 import io.github.legion2.open_cue_cli.CliContext
 import io.github.legion2.open_cue_cli.client.currentGame
 import io.github.legion2.open_cue_cli.echoString
+import io.github.legion2.open_cue_cli.optionForGame
 import kotlinx.coroutines.runBlocking
 
 class ListProfiles : CliktCommand("List all available profiles for the current game sorted by priority", name = "list") {
-    private val gameOption by option("-g", "--game", help = "List all available profiles for the game given by this option", metavar = "<game>")
+    private val gameOption by optionForGame(help = "List all available profiles for the game given by this option")
     private val priorities by option("-p", "--with-priorities", help = "Show the priority of all profiles").flag()
     private val cliContext by requireObject<CliContext>()
     override fun run() = runBlocking {

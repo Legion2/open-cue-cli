@@ -12,6 +12,7 @@ import io.github.legion2.open_cue_cli.CliContext
 import io.github.legion2.open_cue_cli.client.currentGame
 import io.github.legion2.open_cue_cli.client.setGame
 import io.github.legion2.open_cue_cli.client.setState
+import io.github.legion2.open_cue_cli.optionForGame
 import kotlinx.coroutines.runBlocking
 
 class SetState : CliktCommand(name = "set") {
@@ -29,7 +30,7 @@ class SetState : CliktCommand(name = "set") {
 }
 
 class GameOptionGroup : OptionGroup() {
-    val game by option("-g", "--game", help = "Provide a game as option instead of using the current active game", metavar = "<game>").required()
+    val game by optionForGame().required()
     val setGame by option("-s", "--set-game", help = "Activate that given game before setting the state." +
             " Can only be used with -g.").flag()
 }
