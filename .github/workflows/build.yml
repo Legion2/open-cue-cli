@@ -13,3 +13,8 @@ jobs:
         java-version: 8
     - name: Gradle Build
       run: gradle build
+    - name: Upload distribution archive
+      uses: actions/upload-artifact@v2-preview
+      with:
+        name: open-cue-cli.zip
+        path: build/distributions/open-cue-cli.zip
