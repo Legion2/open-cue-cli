@@ -16,7 +16,7 @@ class OpenCueCli : CliktCommand(name = "open-cue-cli") {
             metavar = "<host or ip>").default("localhost")
 
     init {
-        versionOption("0.1.0")
+        versionOption("0.2.0")
     }
 
     override fun run() {
