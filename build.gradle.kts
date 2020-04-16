@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.3.71"
+    kotlin("jvm") version "1.3.72"
     application
 }
 
@@ -25,7 +25,7 @@ dependencies {
     implementation("io.ktor:ktor-client-gson:$ktorVersion")
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
         languageVersion = "1.3"
