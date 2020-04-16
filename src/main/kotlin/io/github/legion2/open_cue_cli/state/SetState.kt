@@ -9,6 +9,7 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import io.github.legion2.open_cue_cli.CliContext
+import io.github.legion2.open_cue_cli.client.clearAllStates
 import io.github.legion2.open_cue_cli.client.currentGame
 import io.github.legion2.open_cue_cli.client.setGame
 import io.github.legion2.open_cue_cli.client.setState
@@ -17,12 +18,16 @@ import kotlinx.coroutines.runBlocking
 
 class SetState : CliktCommand(name = "set") {
     private val optionGroup by GameOptionGroup().cooccurring()
+    private val clearState by option("-c", "--clear-all", help = "Clear all states before setting the new state").flag()
     private val state by argument("state")
     private val cliContext by requireObject<CliContext>()
     override fun run(): Unit = runBlocking {
         val game = optionGroup?.game ?: cliContext.sdkClient.currentGame().name
         if (optionGroup?.setGame == true) {
             cliContext.sdkClient.setGame(game)
+        }
+        if (clearState) {
+            cliContext.sdkClient.clearAllStates(game)
         }
         val string = cliContext.sdkClient.setState(game, state)
         echo(string)
