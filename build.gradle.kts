@@ -30,6 +30,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         jvmTarget = "1.8"
         languageVersion = "1.3"
         apiVersion = "1.3"
+        freeCompilerArgs += "-Xopt-in=com.github.ajalt.clikt.completion.ExperimentalCompletionCandidates"
     }
 }
 

@@ -15,6 +15,14 @@ jobs:
           java-version: 8
       - name: Gradle Build
         run: gradle build
+      - name: Generate Bash Completion
+        env:
+          OPEN_CUE_CLI_COMPLETE: bash
+        run: |
+          unzip build/distributions/open-cue-cli.zip
+          ./open-cue-cli/open-cue-cli > open-cue-cli/bash-complete-open-cue-cli.sh
+          chmod +x open-cue-cli/bash-complete-open-cue-cli.sh
+          zip open-cue-cli.zip open-cue-cli
       - name: Get upload url
         id: release-id
         run: |
@@ -27,6 +35,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.release-id.outputs.upload_url }}
-          asset_path: build/distributions/open-cue-cli.zip
+          asset_path: open-cue-cli.zip
           asset_name: open-cue-cli.zip
           asset_content_type: application/zip

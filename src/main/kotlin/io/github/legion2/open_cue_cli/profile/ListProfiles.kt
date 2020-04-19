@@ -14,6 +14,6 @@ class ListProfiles : CliktCommand("List all available profiles for the current g
     private val cliContext by requireObject<CliContext>()
     override fun run() = runBlocking {
         val profiles = cliContext.sdkClient.listProfiles()
-        echo(profiles.sortedBy { it.priority }.echoString { profile -> if (details) profile.echoString else profile.name })
+        echo(profiles.sortedBy { it.priority }.echoString { profile -> if (details) profile.echoString else profile.name }, lineSeparator = "\n")
     }
 }
