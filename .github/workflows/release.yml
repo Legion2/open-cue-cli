@@ -22,7 +22,7 @@ jobs:
           unzip build/distributions/open-cue-cli.zip
           ./open-cue-cli/open-cue-cli > open-cue-cli/bash-complete-open-cue-cli.sh
           chmod +x open-cue-cli/bash-complete-open-cue-cli.sh
-          zip open-cue-cli.zip open-cue-cli
+          zip -r open-cue-cli.zip open-cue-cli
       - name: Get upload url
         id: release-id
         run: |
