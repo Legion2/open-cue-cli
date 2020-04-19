@@ -1,36 +1,24 @@
 package io.github.legion2.open_cue_cli
 
 import com.github.ajalt.clikt.core.subcommands
-import io.github.legion2.open_cue_cli.event.ClearAllEvent
-import io.github.legion2.open_cue_cli.event.EventCommand
-import io.github.legion2.open_cue_cli.event.SetEvent
-import io.github.legion2.open_cue_cli.game.*
-import io.github.legion2.open_cue_cli.profile.ListProfiles
-import io.github.legion2.open_cue_cli.profile.ProfileCommand
-import io.github.legion2.open_cue_cli.state.ClearAllState
-import io.github.legion2.open_cue_cli.state.ClearState
-import io.github.legion2.open_cue_cli.state.SetState
-import io.github.legion2.open_cue_cli.state.StateCommand
+import io.github.legion2.open_cue_cli.profile.*
+import io.github.legion2.open_cue_cli.sdk.*
 
 fun createCLI(): OpenCueCli {
     return OpenCueCli().subcommands(
-            GameCommand().subcommands(
+            SdkCommand().subcommands(
+                    SdkInfo(),
                     CurrentGame(),
-                    ListGames(),
-                    SetGame(),
-                    ResetGame()
-            ),
-            StateCommand().subcommands(
-                    SetState(),
-                    ClearState(),
-                    ClearAllState()
-            ),
-            EventCommand().subcommands(
-                    SetEvent(),
-                    ClearAllEvent()
+                    SdkControl(),
+                    StopAllEvents(),
+                    DeactivateAllProfiles()
             ),
             ProfileCommand().subcommands(
-                    ListProfiles()
+                    ListProfiles(),
+                    ProfileInfo(),
+                    ActivateProfile(),
+                    DeactivateProfile(),
+                    TriggerProfile()
             ))
 }
 

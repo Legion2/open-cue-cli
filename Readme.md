@@ -1,9 +1,9 @@
 # Open CUE CLI [![Build](https://github.com/Legion2/open-cue-cli/workflows/Build/badge.svg)](https://github.com/Legion2/open-cue-cli/actions?query=workflow%3ABuild)
 Command Line Interface (CLI) to change iCUE profiles from the command line and play multiple profiles at once.
-This CLI uses the iCUE Game SDK via the [iCUE Unofficial Game Integration](https://github.com/Zac-McDonald/iCUE-Custom-Game-Integration) server.
+This CLI uses the iCUE Game SDK via the [Open CUE Service](https://github.com/Legion2/open-cue-service).
 
 ## Getting Started
-Download and start the [iCUE Unofficial Game Integration](https://github.com/Zac-McDonald/iCUE-Custom-Game-Integration) server.
+Download and start the [Open CUE Service](https://github.com/Legion2/open-cue-service).
 Download the [latest release](https://github.com/Legion2/open-cue-cli/releases/latest) of Open CUE CLI and extract the archive.
 You must at least have Java 8 installed.
 Call the cli tool `open-cue-cli.bat` or `open-cue-cli` from a command prompt with the option `--help`.
@@ -25,25 +25,25 @@ Commands:
 ```
 
 ### Examples
-Activates the profile `SDKL_Fire` from the game `Common` and also set the game active
+Activates the profile `Fire`
 ```
-open-cue-cli state set -s -g Common SDKL_Fire
+open-cue-cli profile activate Fire
 ```
 
-Lists all profiles of the current game
+Lists all profiles
 ```
 open-cue-cli profile list
 ```
 
-Plays the profile `SDKL_Explosion` of the current game as event
+Plays the profile `Wave` as event for a short time
 ```
-open-cue-cli event set SDKL_Explosion
+open-cue-cli profile trigger Wave
 ```
 
 ### Profiles
 All profiles that you want to use with the Open CUE CLI must be in the iCUE `GameSdkEffects` directory.
 On Windows this is in the installation directory of iCUE `C:\Program Files (x86)\Corsair\CORSAIR iCUE Software\GameSdkEffects`.
-These profiles are just the exported files from iCUE profiles.
+These profiles are just the exported files when you export a profile in iCUE.
 When export profiles from iCUE only select "Lighting Effects" in the export settings.
 
 Profiles are grouped into games, this is because the SDK was designed for iCUE Game integration.
@@ -58,13 +58,15 @@ Create a new text file named `priorities.cfg` in the `profiles` directory.
 
 The file must contain all profile names one per line with a unique priority value.
 ```properties
-MyProfile1=3
-OtherProfile=8
+MyProfile=3
+Other_Profile=8
 Test=245
 ```
-Profile names **SHOULD NOT** contain special characters like `-`, `*`, `.` and spaces.
-Underscores (`_`) are allowed in profile names.
+Profile names **MUST** only contain normal characters "a-z", "A-Z" and "_".
+Also don't use language specific characters like ä and é.
 The priorities comes into play when you activate two profiles, then the profile with the higher priority is shown on top of the other.
+
+> `default` is not allowed as profile name.
 
 ## Packaging of this application
 This package is provide as zip containing executables and dependencies as jars.

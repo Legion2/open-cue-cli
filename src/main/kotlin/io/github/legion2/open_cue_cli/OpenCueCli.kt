@@ -1,7 +1,7 @@
 package io.github.legion2.open_cue_cli
 
 import com.github.ajalt.clikt.core.CliktCommand
-import com.github.ajalt.clikt.core.ParameterHolder
+import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.versionOption
@@ -10,13 +10,13 @@ import com.github.ajalt.clikt.parameters.types.restrictTo
 import io.github.legion2.open_cue_cli.CliContext.Companion.createCliContext
 
 class OpenCueCli : CliktCommand(name = "open-cue-cli") {
-    private val port: Int by option("-p", "--port", help = "Port of the iCUE SDK HTTP Server", metavar = "<port>")
+    private val port: Int by option("-p", "--port", help = "Port of the Open CUE Service", metavar = "<port>")
             .int().restrictTo(min = 0).default(25555)
-    private val host: String by option("-H", "--host", help = "Hostname or ip address of the iCUE SDK HTTP Server",
+    private val host: String by option("-H", "--host", help = "Hostname or ip address of the Open CUE Service",
             metavar = "<host or ip>").default("localhost")
 
     init {
-        versionOption("0.2.0")
+        versionOption("0.3.0")
     }
 
     override fun run() {
@@ -28,5 +28,4 @@ val <T> Iterable<T>.echoString: String get() = joinToString("\n")
 
 fun <T> Iterable<T>.echoString(transform: (T) -> CharSequence): String = joinToString("\n", transform = transform)
 
-fun ParameterHolder.optionForGame(help: String? = null) = option("-g", "--game", help = help
-        ?: "Provide a game as option instead of using the current active game", metavar = "<game>")
+fun CliktCommand.profileArgument(help: String? = null) = argument("profile", help = help ?: "The name of the profile")
