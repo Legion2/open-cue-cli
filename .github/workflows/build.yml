@@ -21,7 +21,7 @@ jobs:
           ./open-cue-cli/open-cue-cli > open-cue-cli/bash-complete-open-cue-cli.sh
           chmod +x open-cue-cli/bash-complete-open-cue-cli.sh
       - name: Upload distribution archive
-        uses: actions/upload-artifact@v2-preview
+        uses: actions/upload-artifact@v2
         with:
           name: open-cue-cli
           path: open-cue-cli/
