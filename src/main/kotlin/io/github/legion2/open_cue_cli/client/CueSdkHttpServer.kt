@@ -12,6 +12,7 @@ import io.ktor.client.features.json.GsonSerializer
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.request.get
 import io.ktor.client.request.post
+import io.ktor.client.request.put
 import io.ktor.client.statement.readText
 import io.ktor.http.ParametersBuilder
 import io.ktor.http.URLBuilder
@@ -51,11 +52,11 @@ class CueSdkHttpServer(private val host: String = "localhost", private val port:
 
     suspend fun getControl(): Boolean = client.get(url("api/sdk/control"))
 
-    suspend fun setControl(value: Boolean): Boolean = client.post(url("api/sdk/control/${value}"))
+    suspend fun setControl(value: Boolean): Boolean = client.put(url("api/sdk/control/${value}"))
 
-    suspend fun clearAllEvents(): Unit = client.post(url("api/sdk/stop-events"))
+    suspend fun clearAllEvents(): Unit = client.post(url("api/sdk/stop-all-events"))
 
-    suspend fun deactivateAll(): Unit = client.post(url("api/sdk/deactivate-profiles"))
+    suspend fun deactivateAll(): Unit = client.post(url("api/sdk/deactivate-all-profiles"))
 
     suspend fun listProfiles(): List<Profile> = client.get(url("api/profiles"))
 
@@ -63,7 +64,7 @@ class CueSdkHttpServer(private val host: String = "localhost", private val port:
 
     suspend fun trigger(profile: String): Profile = client.post(url("api/profiles/${profile}/trigger"))
 
-    suspend fun activate(profile: String): Profile = client.post(url("api/profiles/${profile}/state/true"))
+    suspend fun activate(profile: String): Profile = client.put(url("api/profiles/${profile}/state/true"))
 
-    suspend fun deactivate(profile: String): Profile = client.post(url("api/profiles/${profile}/state/false"))
+    suspend fun deactivate(profile: String): Profile = client.put(url("api/profiles/${profile}/state/false"))
 }
