@@ -1,6 +1,7 @@
 # Open CUE CLI [![Build](https://github.com/Legion2/open-cue-cli/workflows/Build/badge.svg)](https://github.com/Legion2/open-cue-cli/actions?query=workflow%3ABuild)
 Command Line Interface (CLI) to change iCUE profiles from the command line and play multiple profiles at once.
 This CLI uses the iCUE Game SDK via the [Open CUE Service](https://github.com/Legion2/open-cue-service).
+You can use all your customized iCUE profiles.
 
 ## Getting Started
 Download and start the [Open CUE Service](https://github.com/Legion2/open-cue-service).
@@ -12,32 +13,30 @@ Call the cli tool `open-cue-cli.bat` or `open-cue-cli` from a command prompt wit
 Usage: open-cue-cli [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  -p, --port <port>        Port of the iCUE SDK HTTP Server
-  -H, --host <host or ip>  Hostname or ip address of the iCUE SDK HTTP Server
+  -p, --port <port>        Port of the Open CUE Service
+  -H, --host <host or ip>  Hostname or ip address of the Open CUE Service
   --version                Show the version and exit
   -h, --help               Show this message and exit
 
 Commands:
-  game
-  state
-  event
+  sdk
   profile
 ```
 
 ### Examples
 Activates the profile `Fire`
 ```
-open-cue-cli profile activate Fire
+> open-cue-cli profile activate Fire
 ```
 
 Lists all profiles
 ```
-open-cue-cli profile list
+> open-cue-cli profile list
 ```
 
 Plays the profile `Wave` as event for a short time
 ```
-open-cue-cli profile trigger Wave
+> open-cue-cli profile trigger Wave
 ```
 
 ### Profiles
