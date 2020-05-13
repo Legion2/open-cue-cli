@@ -17,6 +17,6 @@ class ListProfiles : CliktCommand("List all available profiles for the current g
         val profiles = cliContext.sdkClient.listProfiles().run {
             if (activeProfiles) filter { profile -> profile.state } else this
         }
-        echo(profiles.sortedBy { it.priority }.echoString { profile -> if (details) profile.echoString else profile.name }, lineSeparator = "\n")
+        echo(profiles.sortedBy { it.priority }.echoString { profile -> if (details) profile.echoString else profile.name })
     }
 }

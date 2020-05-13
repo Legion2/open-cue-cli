@@ -2,6 +2,7 @@ package io.github.legion2.open_cue_cli
 
 import com.github.ajalt.clikt.completion.CompletionCandidates
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.context
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
@@ -18,6 +19,9 @@ class OpenCueCli : CliktCommand(name = "open-cue-cli", autoCompleteEnvvar = "OPE
 
     init {
         versionOption("0.4.0")
+        context {
+            console = OpenCueConsole()
+        }
     }
 
     override fun run() {
