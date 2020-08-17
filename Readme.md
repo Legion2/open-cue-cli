@@ -6,7 +6,6 @@ You can use all your customized iCUE profiles.
 ## Getting Started
 Download and start the [Open CUE Service](https://github.com/Legion2/open-cue-service).
 Download the [latest release](https://github.com/Legion2/open-cue-cli/releases/latest) of Open CUE CLI and extract the archive.
-You must at least have Java 8 installed.
 Call the cli tool `open-cue-cli.bat` or `open-cue-cli` from a command prompt with the option `--help`.
 
 ```
@@ -46,7 +45,7 @@ These profiles are just the exported files when you export a profile in iCUE.
 When export profiles from iCUE only select "Lighting Effects" in the export settings.
 
 Profiles are grouped into games, this is because the SDK was designed for iCUE Game integration.
-So each subdirectory of `GameSdkEffects` represent a game and contains all it's profiles and a `priorities.cfg` file.
+So each subdirectory of `GameSdkEffects` represent a game and contains all its profiles and a `priorities.cfg` file.
 
 ### Use own profiles/effects
 The subdirectories of `GameSdkEffects` correspond to games, but you can also create own subdirectories.
@@ -67,9 +66,8 @@ You must set the name of the profile, when you export it from iCUE, you can't ch
 The priorities comes into play when you activate two profiles, then the profile with the higher priority is shown on top of the other.
 
 ## Packaging of this application
-This package is provide as zip containing executables and dependencies as jars.
-A Java Runtime Environment (JRE) must be installed to run the application.
-Just download the zip archive, extract it where you want and then execute one of the executable scripts from the extracted archive.
+This package is provide as zip containing optimized executable runtime image.
+Just download the [zip archive for your platform](https://github.com/Legion2/open-cue-cli/releases), extract it where you want and then execute one of the executable scripts from the extracted archive.
 
 ### Why not provide native executable
 Native executables require curl or other native implementations to do http calls.
