@@ -18,6 +18,7 @@ application {
 }
 
 runtime {
+    addOptions("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
     addModules("java.base",
             "java.sql",//because of gson
             "jdk.unsupported"//https://stackoverflow.com/questions/61727613/unexpected-behaviour-from-gson
