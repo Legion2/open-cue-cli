@@ -45,7 +45,7 @@ These profiles are just the exported files when you export a profile in iCUE.
 When export profiles from iCUE only select "Lighting Effects" in the export settings.
 
 Profiles are grouped into games, this is because the SDK was designed for iCUE Game integration.
-So each subdirectory of `GameSdkEffects` represent a game and contains all it's profiles and a `priorities.cfg` file.
+So each subdirectory of `GameSdkEffects` represent a game and contains all its profiles and a `priorities.cfg` file.
 
 ### Use own profiles/effects
 The subdirectories of `GameSdkEffects` correspond to games, but you can also create own subdirectories.
@@ -66,7 +66,7 @@ You must set the name of the profile, when you export it from iCUE, you can't ch
 The priorities comes into play when you activate two profiles, then the profile with the higher priority is shown on top of the other.
 
 ## Packaging of this application
-This package is provide as zip containing optimized runtime images.
+This package is provide as zip containing optimized executable runtime image.
 Just download the [zip archive for your platform](https://github.com/Legion2/open-cue-cli/releases), extract it where you want and then execute one of the executable scripts from the extracted archive.
 
 ### Why not provide native executable
