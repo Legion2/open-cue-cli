@@ -9,32 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Java JDK 8
-        uses: actions/setup-java@v1.3.0
+      - name: Setup Java JDK
+        uses: actions/setup-java@v1.4.1
         with:
-          java-version: 8
+          java-version: 14
       - name: Gradle Build
-        run: gradle build
-      - name: Generate Bash Completion
-        env:
-          OPEN_CUE_CLI_COMPLETE: bash
-        run: |
-          unzip build/distributions/open-cue-cli.zip
-          ./open-cue-cli/open-cue-cli > open-cue-cli/bash-complete-open-cue-cli.sh
-          chmod +x open-cue-cli/bash-complete-open-cue-cli.sh
-          zip -r open-cue-cli.zip open-cue-cli
+        run: gradle runtimeZip
       - name: Get upload url
         id: release-id
         run: |
           RELEASE_ID=$(jq --raw-output '.release.id' $GITHUB_EVENT_PATH)
           echo "::set-output name=upload_url::https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets{?name,label}"
-      - name: Upload Release Asset
+      - name: Upload Release Assets
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: bgpat/release-asset-action@03b0c30db1c4031ce3474740b0e4275cd7e126a3
         with:
-          upload_url: ${{ steps.release-id.outputs.upload_url }}
-          asset_path: open-cue-cli.zip
-          asset_name: open-cue-cli.zip
-          asset_content_type: application/zip
+          pattern: build/open-cue-cli-*.zip
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          release-url: ${{ steps.release-id.outputs.upload_url }}
+          allow-overwrite: true

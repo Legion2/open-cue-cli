@@ -1,3 +1,5 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
     kotlin("jvm") version "1.4.0"
     application
@@ -56,6 +58,29 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         languageVersion = "1.4"
         apiVersion = "1.4"
         freeCompilerArgs += "-Xopt-in=com.github.ajalt.clikt.completion.ExperimentalCompletionCandidates"
+    }
+}
+
+val generateCliCompletions by tasks.registering(JavaExec::class) {
+    dependsOn("classes")
+    classpath = sourceSets.main.get().runtimeClasspath
+    main = application.mainClassName
+    environment("OPEN_CUE_CLI_COMPLETE", "bash")
+
+    val completions = file("$buildDir/completions")
+    outputs.dir(completions)
+    doFirst {
+        println("This is executed first during the execution phase.")
+        completions.mkdirs()
+        standardOutput = File(completions, "bash-complete-open-cue-cli.sh").outputStream()
+    }
+}
+
+distributions {
+    main {
+        contents {
+            from(generateCliCompletions)
+        }
     }
 }
 
