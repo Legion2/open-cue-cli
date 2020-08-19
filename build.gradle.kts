@@ -3,7 +3,7 @@ import java.io.ByteArrayOutputStream
 plugins {
     kotlin("jvm") version "1.4.0"
     application
-    id("org.beryx.runtime") version "1.11.2"
+    id("org.beryx.runtime") version "1.11.3"
 }
 
 repositories {
@@ -88,12 +88,4 @@ distributions {
 tasks.withType<Wrapper> {
     gradleVersion = "6.6"
     distributionType = Wrapper.DistributionType.ALL
-}
-
-// workaround for https://github.com/beryx/badass-runtime-plugin/issues/67
-tasks.withType<CreateStartScripts> {
-    doLast {
-        windowsScript.writeText(windowsScript.readText()
-                .replace("set JAVA_HOME=\"%~dp0..\"", "set JAVA_HOME=\"%~dp0\""))
-    }
 }
