@@ -61,8 +61,8 @@ Other_Profile=8
 Test=245
 ```
 Profile names **MUST** only contain normal characters "a-z", "A-Z" and "_".
-Also don't use language specific characters like ä and é.
-You must set the name of the profile, when you export it from iCUE, you can't change it later, because it's stored inside the profile file.
+Also don't use language specific characters such as ä and é.
+You must set the name of the profile before exporting it from iCUE, you can't change it later, because it is stored inside the profile file.
 The priorities comes into play when you activate two profiles, then the profile with the higher priority is shown on top of the other.
 
 ## Packaging of this application
