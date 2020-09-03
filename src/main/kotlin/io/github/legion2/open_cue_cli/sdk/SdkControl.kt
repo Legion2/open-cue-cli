@@ -13,9 +13,9 @@ class SdkControl : CliktCommand(name = "control") {
     override fun run(): Unit = runBlocking {
         val value = value
         if (value == null) {
-            echo(cliContext.sdkClient.getControl())
+            echo(cliContext.sdkClient.getControl().toString())
         } else {
-            echo(cliContext.sdkClient.setControl(value))
+            echo(cliContext.sdkClient.setControl(value).toString())
         }
     }
 }
