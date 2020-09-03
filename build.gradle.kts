@@ -43,10 +43,10 @@ runtime {
 }
 
 val ktorVersion = "1.3.2"
-val cliktVersion = "2.6.0"
+val cliktVersion = "3.0.0"
 
 dependencies {
-    implementation("com.github.ajalt:clikt:$cliktVersion")
+    implementation("com.github.ajalt.clikt:clikt:$cliktVersion")
     implementation("io.ktor:ktor-client:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-json:$ktorVersion")
@@ -58,7 +58,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         jvmTarget = "14"
         languageVersion = "1.4"
         apiVersion = "1.4"
-        freeCompilerArgs += "-Xopt-in=com.github.ajalt.clikt.completion.ExperimentalCompletionCandidates"
     }
 }
 
@@ -71,7 +70,6 @@ val generateCliCompletions by tasks.registering(JavaExec::class) {
     val completions = file("$buildDir/completions")
     outputs.dir(completions)
     doFirst {
-        println("This is executed first during the execution phase.")
         completions.mkdirs()
         standardOutput = File(completions, "bash-complete-open-cue-cli.sh").outputStream()
     }
