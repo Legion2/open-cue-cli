@@ -40,12 +40,12 @@ Plays the profile `Wave` as event for a short time
 
 ### Profiles
 All profiles that you want to use with the Open CUE CLI must be in the iCUE `GameSdkEffects` directory.
-On Windows this is in the installation directory of iCUE `C:\Program Files (x86)\Corsair\CORSAIR iCUE Software\GameSdkEffects`.
+On Windows this is `C:\ProgramData\Corsair\CUE\GameSdkEffects` for [iCUE 3.32.80](https://github.com/Legion2/open-cue-cli/issues/5) and newer.
 These profiles are just the exported files when you export a profile in iCUE.
 When export profiles from iCUE only select "Lighting Effects" in the export settings.
 
 Profiles are grouped into games, this is because the SDK was designed for iCUE Game integration.
-So each subdirectory of `GameSdkEffects` represent a game and contains all its profiles and a `priorities.cfg` file.
+So each subdirectory of `GameSdkEffects` represents a game and contains all its profiles and a `priorities.cfg` file.
 
 ### Use own profiles/effects
 The subdirectories of `GameSdkEffects` correspond to games, but you can also create own subdirectories.
