@@ -65,6 +65,9 @@ Also don't use language specific characters such as ä and é.
 You must set the name of the profile before exporting it from iCUE, you can't change it later, because it is stored inside the profile file.
 The priorities comes into play when you activate two profiles, then the profile with the higher priority is shown on top of the other.
 
+## Troubleshooting
+See [Open CUE Service Troubleshooting](https://github.com/Legion2/open-cue-service#troubleshooting)
+
 ## Packaging of this application
 This package is provide as zip containing optimized executable runtime image.
 Just download the [zip archive for your platform](https://github.com/Legion2/open-cue-cli/releases), extract it where you want and then execute one of the executable scripts from the extracted archive.
