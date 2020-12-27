@@ -14,7 +14,7 @@ jobs:
         with:
           java-version: 14
       - name: Gradle Build
-        run: gradle runtimeZip
+        run: ./gradlew runtimeZip
       - name: Get upload url
         id: release-id
         run: |

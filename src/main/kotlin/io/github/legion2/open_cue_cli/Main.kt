@@ -8,7 +8,7 @@ fun createCLI(): OpenCueCli {
     return OpenCueCli().subcommands(
             SdkCommand().subcommands(
                     SdkInfo(),
-                    CurrentGame(),
+                    CurrentProfilesDirectoryName(),
                     SdkControl(),
                     StopAllEvents(),
                     DeactivateAllProfiles()

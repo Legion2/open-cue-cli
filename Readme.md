@@ -44,11 +44,11 @@ On Windows this is `C:\ProgramData\Corsair\CUE\GameSdkEffects` for [iCUE 3.32.80
 These profiles are just the exported files when you export a profile in iCUE.
 When export profiles from iCUE only select "Lighting Effects" in the export settings.
 
-Profiles are grouped into games, this is because the SDK was designed for iCUE Game integration.
-So each subdirectory of `GameSdkEffects` represents a game and contains all its profiles and a `priorities.cfg` file.
+Profiles are grouped into directories, which normally belong to games because the SDK was designed for iCUE Game integration.
+Each subdirectory of `GameSdkEffects` is a group of profiles and contains a `priorities.cfg` file.
 
 ### Use own profiles/effects
-The subdirectories of `GameSdkEffects` correspond to games, but you can also create own subdirectories.
+The subdirectories of `GameSdkEffects` normally correspond to games, but you can also create own subdirectories.
 If you want to add your own profiles/effects, create a new directory in the `GameSdkEffects` directory called `profiles`.
 Create a new text file named `priorities.cfg` in the `profiles` directory.
 
@@ -69,8 +69,11 @@ The priorities comes into play when you activate two profiles, then the profile 
 See [Open CUE Service Troubleshooting](https://github.com/Legion2/open-cue-service#troubleshooting)
 
 ## Packaging of this application
-This package is provide as zip containing optimized executable runtime image.
+This package is provided as zip containing optimized executable runtime image.
 Just download the [zip archive for your platform](https://github.com/Legion2/open-cue-cli/releases), extract it where you want and then execute one of the executable scripts from the extracted archive.
+
+You can also build the project yourself: `./gradlew runtimeZip`
+The output can be found in the `build` directory.
 
 ### Why not provide native executable
 Native executables require curl or other native implementations to do http calls.

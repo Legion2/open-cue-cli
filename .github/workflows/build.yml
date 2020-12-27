@@ -12,7 +12,7 @@ jobs:
         with:
           java-version: 14
       - name: Gradle Build
-        run: gradle runtimeZip
+        run: ./gradlew runtimeZip
       - name: Upload distribution archive
         uses: actions/upload-artifact@v2
         with:

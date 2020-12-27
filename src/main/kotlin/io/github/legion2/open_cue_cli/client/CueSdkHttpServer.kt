@@ -46,7 +46,7 @@ class CueSdkHttpServer(private val host: String = "localhost", private val port:
         return URLBuilder(host = host, port = port, parameters = httpParameters).path(path).build()
     }
 
-    suspend fun currentGame(): String = client.get(url("api/sdk/game"))
+    suspend fun currentProfilesDirectoryName(): String = client.get(url("api/sdk/profiles-directory-name"))
 
     suspend fun sdkInfo(): SdkDetails = client.get(url("api/sdk/details"))
 
