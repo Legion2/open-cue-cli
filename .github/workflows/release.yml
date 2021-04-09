@@ -12,6 +12,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v2
         with:
+          distribution: adopt
           java-version: 14
       - name: Gradle Build
         run: ./gradlew runtimeZip
