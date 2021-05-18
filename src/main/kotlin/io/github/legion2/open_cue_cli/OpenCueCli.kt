@@ -18,7 +18,7 @@ class OpenCueCli : CliktCommand(name = "open-cue-cli", autoCompleteEnvvar = "OPE
             metavar = "<host or ip>").default("localhost")
 
     init {
-        versionOption("0.6.0")
+        versionOption("1.0.0")
         context {
             console = OpenCueConsole()
         }
