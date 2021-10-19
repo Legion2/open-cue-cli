@@ -3,7 +3,7 @@ import java.io.ByteArrayOutputStream
 plugins {
     kotlin("jvm") version "1.5.31"
     application
-    id("org.beryx.runtime") version "1.12.6"
+    id("org.beryx.runtime") version "1.12.7"
 }
 
 repositories {
