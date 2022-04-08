@@ -15,7 +15,7 @@ jobs:
       - name: Gradle Build
         run: ./gradlew runtimeZip
       - name: Upload distribution archive
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: open-cue-cli
           path: build/open-cue-cli-*.zip
