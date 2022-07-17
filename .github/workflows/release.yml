@@ -12,8 +12,8 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v3
         with:
-          distribution: adopt
-          java-version: 14
+          distribution: temurin
+          java-version: 17
       - name: Gradle Build
         run: ./gradlew runtimeZip
       - name: Get upload url
