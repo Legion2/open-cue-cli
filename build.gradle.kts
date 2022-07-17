@@ -1,7 +1,7 @@
-import java.io.ByteArrayOutputStream
-
 plugins {
-    kotlin("jvm") version "1.6.20"
+    val kotlinVersion = "1.7.10"
+    kotlin("jvm") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     application
     id("org.beryx.runtime") version "1.12.7"
 }
@@ -12,59 +12,63 @@ repositories {
 }
 
 application {
-    mainClassName = "io.github.legion2.open_cue_cli.MainKt"
+    mainClass.set("io.github.legion2.open_cue_cli.MainKt")
     executableDir = ""
     applicationName = "open-cue-cli"
 }
 
 runtime {
     addOptions("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
-    addModules("java.base",
-            "java.sql",//because of gson
-            "jdk.unsupported"//https://stackoverflow.com/questions/61727613/unexpected-behaviour-from-gson
+    addModules(
+        "java.base",
+        "java.sql",//because of gson
+        "jdk.unsupported"//https://stackoverflow.com/questions/61727613/unexpected-behaviour-from-gson
     )
 
     imageZip.set(file("$buildDir/${project.application.applicationName}.zip"))
     targetPlatform("linux-x64") {
-        setJdkHome(jdkDownload("https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%2B12/OpenJDK14U-jdk_x64_linux_hotspot_14.0.2_12.tar.gz"))
+        setJdkHome(jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_linux_hotspot_17.0.3_7.tar.gz"))
     }
     targetPlatform("linux-aarch64") {
-        setJdkHome(jdkDownload("https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%2B12/OpenJDK14U-jdk_aarch64_linux_hotspot_14.0.2_12.tar.gz"))
+        setJdkHome(jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.3_7.tar.gz"))
     }
     targetPlatform("linux-arm32") {
-        setJdkHome(jdkDownload("https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%2B12/OpenJDK14U-jdk_arm_linux_hotspot_14.0.2_12.tar.gz"))
+        setJdkHome(jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_arm_linux_hotspot_17.0.3_7.tar.gz"))
     }
     targetPlatform("windows-x64") {
-        setJdkHome(jdkDownload("https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%2B12/OpenJDK14U-jdk_x64_windows_hotspot_14.0.2_12.zip"))
+        setJdkHome(jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_windows_hotspot_17.0.3_7.zip"))
     }
     targetPlatform("mac-x64") {
-        setJdkHome(jdkDownload("https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%2B12/OpenJDK14U-jdk_x64_mac_hotspot_14.0.2_12.tar.gz"))
+        setJdkHome(jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_mac_hotspot_17.0.3_7.tar.gz"))
+    }
+    targetPlatform("mac-aarch64") {
+        setJdkHome(jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.3_7.tar.gz"))
     }
 }
 
-val ktorVersion = "1.6.8"
+val ktorVersion = "2.0.3"
 val cliktVersion = "3.5.0"
 
 dependencies {
     implementation("com.github.ajalt.clikt:clikt:$cliktVersion")
-    implementation("io.ktor:ktor-client:$ktorVersion")
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
-    implementation("io.ktor:ktor-client-json:$ktorVersion")
-    implementation("io.ktor:ktor-client-gson:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "14"
-        languageVersion = "1.4"
-        apiVersion = "1.4"
+        jvmTarget = "17"
+        languageVersion = "1.7"
+        apiVersion = "1.7"
     }
 }
 
 val generateCliCompletions by tasks.registering(JavaExec::class) {
     dependsOn("classes")
     classpath = sourceSets.main.get().runtimeClasspath
-    main = application.mainClassName
+    main = application.mainClass.get()
     environment("OPEN_CUE_CLI_COMPLETE", "bash")
 
     val completions = file("$buildDir/completions")
@@ -84,6 +88,6 @@ distributions {
 }
 
 tasks.withType<Wrapper> {
-    gradleVersion = "7.0"
+    gradleVersion = "7.3"
     distributionType = Wrapper.DistributionType.ALL
 }
