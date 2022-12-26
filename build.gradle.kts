@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     application
-    id("org.beryx.runtime") version "1.12.7"
+    id("org.beryx.runtime") version "1.13.0"
 }
 
 repositories {
