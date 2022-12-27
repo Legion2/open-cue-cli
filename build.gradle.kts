@@ -47,7 +47,7 @@ runtime {
 }
 
 val ktorVersion = "2.2.1"
-val cliktVersion = "3.5.0"
+val cliktVersion = "3.5.1"
 
 dependencies {
     implementation("com.github.ajalt.clikt:clikt:$cliktVersion")
