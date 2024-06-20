@@ -46,7 +46,7 @@ runtime {
     }
 }
 
-val ktorVersion = "2.3.11"
+val ktorVersion = "2.3.12"
 val cliktVersion = "3.5.4"
 
 dependencies {
