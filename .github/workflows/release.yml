@@ -23,7 +23,7 @@ jobs:
           echo "::set-output name=upload_url::https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets{?name,label}"
       - name: Upload Release Assets
         id: upload-release-asset
-        uses: bgpat/release-asset-action@03b0c30db1c4031ce3474740b0e4275cd7e126a3
+        uses: bgpat/release-asset-action@1de4074dcae3e40fcaf4a08c363a2a71c8b194c7
         with:
           pattern: build/open-cue-cli-*.zip
           github-token: ${{ secrets.GITHUB_TOKEN }}
